@@ -9,6 +9,26 @@ The image already defines two CEKit modules:
 2. The `install.rh.sso.zip` module, which extracts the RH-SSO 7.6.3.GA server
    distribution Zip archive (using `/opt/sso/rh-sso-7.6` as `JBOSS_HOME`)
 
+## Building the Image
+
+You can build the image using the following command:
+```
+$ cekit --descriptor image.yaml build docker
+```
+
+Note: Ensure the `docker` service is running on your host.
+
+## Running the image
+
+You can run the image as follows:
+```
+$ docker run -it --network=host custom-rh-sso-763-openshift-ubi8-image:7.6.3.GA-1
+```
+
+Once the image has started, navigate the browser to `http://localhost:8080/auth`
+and create RH-SSO administrator user. Then click the `Administration Console`
+link and specify RH-SSO admin user credentials to login.
+
 ## Homework
 
 Please create a (full) definition of a new `check.opt.sso.modules.perms` CEKit
