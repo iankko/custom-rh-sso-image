@@ -1,0 +1,38 @@
+schema_version: 1
+name: "custom-rh-sso-763-openshift-ubi8-image"
+description: "Custom RH-SSO 7.6.3.GA OpenShift container image based on UBI 8 Minimal image."
+version: "7.6.3.GA-1"
+from: "registry.redhat.io/ubi8/ubi-minimal"
+labels:
+  - name: "com.redhat.component"
+    value: "custom-rh-sso-763-container"
+envs:
+  - name: "RH_SSO_VERSION"
+    value: "7.6.3.GA"
+    description: "Holds the version of the underlying RH-SSO product."
+ports:
+  - value: 8080
+  - value: 8443
+modules:
+  repositories:
+    - name: modules-for-custom-rh-sso-image
+      path: modules
+  install:
+    - name: "add.jboss.user"
+      version: "1.0"
+    - name: "install.rh.sso.zip"
+      version: "1.0"
+        #    - name: "check.opt.sso.modules.perms"
+        #      version: "1.0"
+packages:
+  manager: microdnf
+  install:
+    - hostname
+    - vim-minimal
+    - which
+run:
+  cmd:
+    - "/opt/sso/rh-sso-7.6/bin/standalone.sh"
+    - "-b=172.17.0.2"
+  user: jboss
+  workdir: "/home/jboss"

@@ -1,0 +1,18 @@
+schema_version: 1
+name: "install.rh.sso.zip"
+version: "1.0"
+description: >
+  Extract RH-SSO 7.6.3.GA dist zip to the /opt/sso directory.
+envs:
+  - name: "JBOSS_HOME"
+    value: "/opt/sso/rh-sso-7.6"
+packages:
+  install:
+    - java-11-openjdk-devel
+    - unzip
+artifacts:
+  - name: rh-sso-7.6.3-server-dist.zip
+    # Note: Be sure to adjust the following path to the real location of the RH-SSO 7.6.3.GA serveir dist Zip archive.
+    path: /home/iankko/custom-rh-sso-image/artifacts/rh-sso-7.6.3-server-dist.zip
+execute:
+  - script: install_rh_sso_zip.sh

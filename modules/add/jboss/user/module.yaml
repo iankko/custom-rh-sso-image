@@ -1,0 +1,13 @@
+schema_version: 1
+name: "add.jboss.user"
+version: "1.0"
+description: >
+  Adds a 'jboss' system user and defines certain env vars.
+envs:
+  - name: "HOME"
+    value: "/home/jboss"
+packages:
+  install:
+    - shadow-utils
+execute:
+  - script: add_system_jboss_user.sh
